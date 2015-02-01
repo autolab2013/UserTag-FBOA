@@ -40,3 +40,24 @@ Workflow
 when user hover, trigur js to display dialog.
 use alchemy api to analyze the user comment. 
 set user thumbnail according to the returned result.
+
+---
+```javascript
+ $('input#submit').click(function() {
+        // Get all the forms elements and their values in one step
+        var values = $('textarea#comment').val();
+    });
+
+
+
+});
+
+var alchemy_js = function(myText){
+    var AlchemyAPI = require('./alchemyapi');
+    var alchemyapi = new AlchemyAPI();
+    //var myText = "Whoa, AlchemyAPI's Node.js SDK is really great, I can't wait to build my app!";
+    alchemyapi.sentiment("text", myText, {}, function(response) {
+        console.log("Sentiment: " + response["docSentiment"]["type"]);
+    });
+}
+```
