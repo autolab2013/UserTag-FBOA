@@ -18,5 +18,10 @@ function user_tag_init() {
     wp_localize_script('userTag', "userTagData", array(
         "pluginPath" => plugin_dir_url(__FILE__)
     ));
+    require_once 'alchemyapi.php';
+    $alchemyapi = new AlchemyAPI();
+    $myText = "I can't wait to integrate AlchemyAPI's awesome PHP SDK into my app!";
+    $response = $alchemyapi->sentiment("text", $myText, null);
+    echo "Sentiment: ", $response["docSentiment"]["type"], PHP_EOL;
 }
 
