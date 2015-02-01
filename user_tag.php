@@ -13,7 +13,7 @@ add_action( 'init', 'user_tag_init' );
 
 function user_tag_init() {
     wp_enqueue_script("jquery");
-    wp_enqueue_style( 'fishy', plugins_url( 'user_tag.css', __FILE__ ) );
+    wp_enqueue_style( 'userTag', plugins_url( 'user_tag.css', __FILE__ ) );
     wp_enqueue_script( 'userTag', plugins_url( 'user_tag.js', __FILE__ ), array( 'jquery' ) );
     wp_localize_script('userTag', "userTagData", array(
         "pluginPath" => plugin_dir_url(__FILE__)
