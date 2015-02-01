@@ -8,10 +8,10 @@
  * Author URI:
  */
 
-add_action('admin_init', 'classification_init');
-
-function classification_init(){
-    wp_enqueue_style( 'user_tag', plugins_url( 'fishy.css', __FILE__ ) );
-    wp_enqueue_script( 'user_tag', plugins_url( 'fishy.js', __FILE__ ), array( 'jquery' ) );
+add_action( 'init', 'user_tag_init' );
+function user_tag_init() {
+    wp_enqueue_script("jquery");
+    wp_enqueue_style( 'fishy', plugins_url( 'user_tag.css', __FILE__ ) );
+    wp_enqueue_script( 'userTag', plugins_url( 'user_tag.js', __FILE__ ), array( 'jquery' ) );
 }
 
