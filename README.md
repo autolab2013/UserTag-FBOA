@@ -28,3 +28,16 @@ name style: category_version, version is number 1 to 3
 		no comment: invisible
 		have comments: 
 			do sentimental analysis: good/bad
+
+===
+Presentation
+---
+show addtional user thumbnail on comment.
+when user hover on the thumbnail, display a dialog shows user's stats(# of comments, # of blog written, # of blog watched)
+
+===
+Workflow
+---
+when user hover, trigur js to display dialog.
+use alchemy api to analyze the user comment. 
+set user thumbnail according to the returned result.
