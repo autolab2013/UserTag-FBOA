@@ -37,9 +37,11 @@ class AlchemyAPI {
 	  * OUTPUT:
 	  * none
 	*/ 
-	public function AlchemyAPI() {
+	public function AlchemyAPI($key) {
 		//Load the API Key from api_key.txt
-		$key = trim(file_get_contents("api_key.txt"));
+		//$key = trim(file_get_contents("api_key.txt"));
+		//$key = $key."api_key.txt";
+		//echo $key;
 	
 		if (!$key) {
 			//Keys should not be blank
