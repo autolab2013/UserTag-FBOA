@@ -11,5 +11,22 @@ jQuery(document).ready(function($) {
         $(this).append('<img  class="avatar_right" style="-webkit-user-select: none; cursor: zoom-in;" src="'+ avatarUrl +'" width="50" height="50">');
     });
 
-    console.log(commentAvatars);
+    //now only catch the value when click submit button
+    $('input#submit').click(function() {
+        // Get all the forms elements and their values in one step
+        var values = $('textarea#comment').val();
+    });
+
+
+
 });
+
+var alchemy_js = function(myText){
+    var AlchemyAPI = require('./alchemyapi');
+    var alchemyapi = new AlchemyAPI();
+    //var myText = "Whoa, AlchemyAPI's Node.js SDK is really great, I can't wait to build my app!";
+    alchemyapi.sentiment("text", myText, {}, function(response) {
+        console.log("Sentiment: " + response["docSentiment"]["type"]);
+    });
+}
+
