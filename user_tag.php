@@ -30,5 +30,6 @@ function analyze() {
     $myText = "I can't wait to integrate AlchemyAPI's awesome PHP SDK into my app!";
     $response = $alchemyapi->sentiment("text", $myText, null);
     echo "Sentiment: ", $response["docSentiment"]["type"], PHP_EOL;
+    echo "Scroe: ", $response["docSentiment"]["score"], PHP_EOL;
 }
 
