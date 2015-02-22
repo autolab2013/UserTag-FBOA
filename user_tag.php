@@ -23,12 +23,15 @@ function user_tag_init() {
     wp_localize_script('userTag', "userTagData", array(
         "pluginPath" => plugin_dir_url(__FILE__)
     ));
-    //include 'get-data.php';
 
-    $userScore = get_metadata('user', 1,'score', false)[0];
-    echo ("<div id='user-score'.$userId style='display: none;'>
+    $userScore = 0;
+    if (count(get_user_meta(1, 'score')) != 0) {
+        $userScore = get_metadata('user', 1,'score', false)[0];
+    }
+    echo ("<div id='user-score'.1 style='display: none;'>
     $userScore;
     </div>");
+    exit();
 }
 
 function analyze($commentId) {
@@ -47,12 +50,16 @@ function analyze($commentId) {
     echo "Sentiment: ", $response["docSentiment"]["type"], PHP_EOL;
     if(!empty($response["docSentiment"]["score"])) {
         echo "Score: ", $response["docSentiment"]["score"], PHP_EOL;
-        echo $commentId;
+        //echo $commentId;
         //add_user_meta( $userId, 'comment_score', $response["docSentiment"]["score"], true);
-        update_metadata('user', $userId, 'score', $response["docSentiment"]["score"], '' );
+        //if ()
+        $prevScore = 0;
+        if (count(get_user_meta($userId, 'score')) != 0) {
+            $prevScore = get_metadata('user', $userId,'score', false)[0];
+        }
+
+        update_metadata('user', $userId, 'score', $prevScore + $response["docSentiment"]["score"], '' );
         $userScore = get_metadata('user', $userId,'score', false)[0];
-        //$userScore = get_user_meta($userId, 'comment_score', false);
-        var_dump(get_comments());
         echo $userScore;
     }
     exit();
