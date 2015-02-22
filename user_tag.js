@@ -3,15 +3,9 @@
  */
 
 jQuery(document).ready(function($) {
-
-    var div = document.getElementById("user-score" + "1");
-    var myData = div.textContent;
-    alert(myData);
-
     var number = "001";
     var commentAvatars = $('.comment-author');
     commentAvatars.each(function() {
-
         var avatarUrl = userTagData.pluginPath+"Images/";
         var num = Math.floor(Math.random() * 3) + 1;
         avatarUrl += "00" + num + ".png";

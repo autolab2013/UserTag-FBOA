@@ -31,7 +31,7 @@ function user_tag_init() {
     echo ("<div id='user-score'.1 style='display: none;'>
     $userScore;
     </div>");
-    exit();
+    //exit();
 }
 
 function analyze($commentId) {
