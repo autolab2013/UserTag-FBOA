@@ -34,10 +34,18 @@ function analyze($commentId) {
     //echo plugin_dir_url(__FILE__);
     //$myText = "I can't wait to integrate AlchemyAPI's awesome PHP SDK into my app!";
     $myText = $commentData->comment_content;
+    $userId = $commentData->user_id;
     $response = $alchemyapi->sentiment("text", $myText, null);
     echo "Sentiment: ", $response["docSentiment"]["type"], PHP_EOL;
     if(!empty($response["docSentiment"]["score"])) {
         echo "Score: ", $response["docSentiment"]["score"], PHP_EOL;
+        echo $commentId;
+        //add_user_meta( $userId, 'comment_score', $response["docSentiment"]["score"], true);
+        update_metadata('user', $userId, 'score', $response["docSentiment"]["score"], '' );
+        $userScore = get_metadata('user', $userId,'score', false)[0];
+        //$userScore = get_user_meta($userId, 'comment_score', false);
+        //var_dump($userScore);
+        echo $userScore;
     }
     exit();
 }
