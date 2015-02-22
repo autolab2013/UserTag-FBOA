@@ -11,7 +11,9 @@
 
 add_action( 'init', 'user_tag_init' );
 //add_action( 'init', 'analyze' );
-add_action('comment_post', 'analyze');
+add_action('comment_post',  'analyze');
+
+
 
 function user_tag_init() {
     wp_enqueue_script("jquery");
@@ -21,6 +23,12 @@ function user_tag_init() {
     wp_localize_script('userTag', "userTagData", array(
         "pluginPath" => plugin_dir_url(__FILE__)
     ));
+    //include 'get-data.php';
+
+    $userScore = get_metadata('user', 1,'score', false)[0];
+    echo ("<div id='user-score'.$userId style='display: none;'>
+    $userScore;
+    </div>");
 }
 
 function analyze($commentId) {
@@ -44,9 +52,11 @@ function analyze($commentId) {
         update_metadata('user', $userId, 'score', $response["docSentiment"]["score"], '' );
         $userScore = get_metadata('user', $userId,'score', false)[0];
         //$userScore = get_user_meta($userId, 'comment_score', false);
-        //var_dump($userScore);
+        var_dump(get_comments());
         echo $userScore;
     }
     exit();
 }
+
+
 
