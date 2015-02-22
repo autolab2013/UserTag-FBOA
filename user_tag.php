@@ -24,14 +24,33 @@ function user_tag_init() {
         "pluginPath" => plugin_dir_url(__FILE__)
     ));
 
-    $userScore = 0;
-    if (count(get_user_meta(1, 'score')) != 0) {
-        $userScore = get_metadata('user', 1,'score', false)[0];
+    $comment_list = get_comments();
+//    $list = array();
+//    $key_name = "Sentimental";
+    $score = array();
+    foreach ($comment_list as $comm) {
+        $uid = $comm->user_id;
+        if (count(get_user_meta($uid, 'score')) != 0) {//user_meta non-empty
+            array_push($score, $user_score = get_metadata('user', $uid, 'score', false)[0]);
+        }else
+            array_push($score, 0);
     }
-    echo ("<div id='user-score'.1 style='display: none;'>
-    $userScore;
-    </div>");
-    //exit();
+
+    echo "<meta id='user_comment_data' user_score= ".implode(';', $score).">";
+//        if(!array_key_exists($uid, $list))
+//            $user_list = array($uid => array());
+//        else
+//            $user_list = $list[$uid];
+//        $user_info = get_comment_meta($comm->comment_ID);
+//        if (array_key_exists($key_name, $user_info)) {
+//            array_push($user_list, $user_info[$key_name][0]);
+//        } else
+//            array_push($user_list, 0);
+//        array_push($list, $user_list);
+
+
+
+//    exit();
 }
 
 function analyze($commentId) {
@@ -58,11 +77,24 @@ function analyze($commentId) {
             $prevScore = get_metadata('user', $userId,'score', false)[0];
         }
 
-        update_metadata('user', $userId, 'score', $prevScore + $response["docSentiment"]["score"], '' );
-        $userScore = get_metadata('user', $userId,'score', false)[0];
-        echo $userScore;
+        $prevComment = 0;
+        if (count(get_user_meta($userId, 'comments_count')) != 0) {
+            $prevComment = get_metadata('user', $userId,'comments_count', false)[0];
+        }
+
+        update_metadata('user', $userId, 'score', ($prevScore*$prevComment + $response["docSentiment"]["score"]) /( $prevComment + 1), '' );
+        update_metadata('user', $userId, 'comments_count', ($prevComment + 1), '' );
+        $user_score = get_metadata('user', $userId,'score', false)[0];
+        echo $user_score;
+        echo $prevComment;
     }
     exit();
+}
+
+function commentCount($user_ID) {
+    global $wpdb;
+    $count = $wpdb->get_var('SELECT COUNT(comment_ID) FROM ' . $wpdb->comments. ' WHERE user_id = "' . $user_ID . '"');
+    echo $count . ' comments';
 }
 
 
