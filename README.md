@@ -2,7 +2,22 @@
 
 
 User Classification
+===
+
+V1.0 Design
+
+- Help admin manager comments with less effort, if a comment is aggressive, it will be marked as red, and allow user block this commentor
+
+- What we have now:
+	- Using AlchemyAPI to do comment analysis
+	
+- What is next:
+	-[] Manipulate CSS and javascript to change aggressive comment CSS
+	-[] Add the function of block users
+
 ====
+
+V0.0 Design
 
 - Pokemon:
 	- name style: category_version, version is number 1 to 3
