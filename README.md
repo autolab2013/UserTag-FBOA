@@ -12,8 +12,8 @@ V1.0 Design
 	- Using AlchemyAPI to do comment analysis
 	
 - What is next:
-	-[] Manipulate CSS and javascript to change aggressive comment CSS
-	-[] Add the function of block users
+	- [ ] Manipulate CSS and javascript to change aggressive comment CSS
+	- [ ] Add the function of block users
 
 ====
 
